@@ -1,0 +1,311 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| exam_saas_db       |
+| hospital           |
+| information_schema |
+| mysql              |
+| nsk                |
+| performance_schema |
+| sqlp               |
+| sys                |
++--------------------+
+8 rows in set (0.12 sec)
+
+mysql> use sqlp;
+Database changed
+mysql> show tables;
++----------------+
+| Tables_in_sqlp |
++----------------+
+| company_staff  |
+| employees      |
++----------------+
+2 rows in set (0.03 sec)
+
+mysql> desc employees;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| ID      | char(5)     | YES  |     | NULL    |       |
+| FIRST   | varchar(78) | YES  |     | NULL    |       |
+| LAST    | varchar(78) | YES  |     | NULL    |       |
+| AGE     | int         | YES  |     | NULL    |       |
+| DOJ     | date        | YES  |     | NULL    |       |
+| ADDRESS | tinytext    | YES  |     | NULL    |       |
+| DEPT    | varchar(50) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+7 rows in set (0.03 sec)
+
+mysql> insert into employees(id,first,last,age,doj,address,dept)values('f004','nsk','k',21,'2004-12-28','gajuwaka','cse');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> select*from employees;
++------+-------+------+------+------------+-----------+------+
+| ID   | FIRST | LAST | AGE  | DOJ        | ADDRESS   | DEPT |
++------+-------+------+------+------------+-----------+------+
+| RTY  | N     | SK   |   18 | 2028-12-24 | GFHFHFHFD | CSE  |
+| f004 | nsk   | k    |   21 | 2004-12-28 | gajuwaka  | cse  |
++------+-------+------+------+------------+-----------+------+
+2 rows in set (0.00 sec)
+
+mysql> insert into employees(id,first,last,age,doj,address,dept)values('f003','narasimha','k',20,'2409428','rtc-complex','python');
+ERROR 1292 (22007): Incorrect date value: '2409428' for column 'DOJ' at row 1
+mysql> insert into employees(id,first,last,age,doj,address,dept)values('f003','narasimha','k',20,'240928','rtc-complex','python');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from employees;
++------+-----------+------+------+------------+-------------+--------+
+| ID   | FIRST     | LAST | AGE  | DOJ        | ADDRESS     | DEPT   |
++------+-----------+------+------+------------+-------------+--------+
+| RTY  | N         | SK   |   18 | 2028-12-24 | GFHFHFHFD   | CSE    |
+| f004 | nsk       | k    |   21 | 2004-12-28 | gajuwaka    | cse    |
+| f003 | narasimha | k    |   20 | 2024-09-28 | rtc-complex | python |
++------+-----------+------+------+------------+-------------+--------+
+3 rows in set (0.00 sec)
+
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> select*from employees;
++------+-----------+------+------+------------+-------------+--------+
+| ID   | FIRST     | LAST | AGE  | DOJ        | ADDRESS     | DEPT   |
++------+-----------+------+------+------------+-------------+--------+
+| RTY  | N         | SK   |   18 | 2028-12-24 | GFHFHFHFD   | CSE    |
+| f004 | nsk       | k    |   21 | 2004-12-28 | gajuwaka    | cse    |
+| f003 | narasimha | k    |   20 | 2024-09-28 | rtc-complex | python |
++------+-----------+------+------+------------+-------------+--------+
+3 rows in set (0.00 sec)
+
+mysql> insert into employees set id="dfrt",first="nsk",last="thy";
+Query OK, 1 row affected (0.01 sec)
+
+mysql> update employees set lname='kos' where lname='k';
+ERROR 1054 (42S22): Unknown column 'lname' in 'where clause'
+mysql> update employees set last='kos' where last='k';
+Query OK, 2 rows affected (0.01 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> update employees set first='sai' where last='sk';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from employees;
++------+-----------+------+------+------------+-------------+--------+
+| ID   | FIRST     | LAST | AGE  | DOJ        | ADDRESS     | DEPT   |
++------+-----------+------+------+------------+-------------+--------+
+| RTY  | sai       | SK   |   18 | 2028-12-24 | GFHFHFHFD   | CSE    |
+| f004 | nsk       | kos  |   21 | 2004-12-28 | gajuwaka    | cse    |
+| f003 | narasimha | kos  |   20 | 2024-09-28 | rtc-complex | python |
+| dfrt | nsk       | thy  | NULL | NULL       | NULL        | NULL   |
++------+-----------+------+------+------------+-------------+--------+
+4 rows in set (0.00 sec)
+
+mysql> update employees set dept='java' where dept=null;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> select*from employees;
++------+-----------+------+------+------------+-------------+--------+
+| ID   | FIRST     | LAST | AGE  | DOJ        | ADDRESS     | DEPT   |
++------+-----------+------+------+------------+-------------+--------+
+| RTY  | sai       | SK   |   18 | 2028-12-24 | GFHFHFHFD   | CSE    |
+| f004 | nsk       | kos  |   21 | 2004-12-28 | gajuwaka    | cse    |
+| f003 | narasimha | kos  |   20 | 2024-09-28 | rtc-complex | python |
+| dfrt | nsk       | thy  | NULL | NULL       | NULL        | NULL   |
++------+-----------+------+------+------------+-------------+--------+
+4 rows in set (0.00 sec)
+
+mysql> update employees set dept='java' where id='dfrt';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from employees;
++------+-----------+------+------+------------+-------------+--------+
+| ID   | FIRST     | LAST | AGE  | DOJ        | ADDRESS     | DEPT   |
++------+-----------+------+------+------------+-------------+--------+
+| RTY  | sai       | SK   |   18 | 2028-12-24 | GFHFHFHFD   | CSE    |
+| f004 | nsk       | kos  |   21 | 2004-12-28 | gajuwaka    | cse    |
+| f003 | narasimha | kos  |   20 | 2024-09-28 | rtc-complex | python |
+| dfrt | nsk       | thy  | NULL | NULL       | NULL        | java   |
++------+-----------+------+------+------------+-------------+--------+
+4 rows in set (0.00 sec)
+
+mysql> update employees set address='dwaraka' where age=18;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from employees;
++------+-----------+------+------+------------+-------------+--------+
+| ID   | FIRST     | LAST | AGE  | DOJ        | ADDRESS     | DEPT   |
++------+-----------+------+------+------------+-------------+--------+
+| RTY  | sai       | SK   |   18 | 2028-12-24 | dwaraka     | CSE    |
+| f004 | nsk       | kos  |   21 | 2004-12-28 | gajuwaka    | cse    |
+| f003 | narasimha | kos  |   20 | 2024-09-28 | rtc-complex | python |
+| dfrt | nsk       | thy  | NULL | NULL       | NULL        | java   |
++------+-----------+------+------+------------+-------------+--------+
+4 rows in set (0.00 sec)
+
+mysql> delete from employees where first='sai';
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from employees;
++------+-----------+------+------+------------+-------------+--------+
+| ID   | FIRST     | LAST | AGE  | DOJ        | ADDRESS     | DEPT   |
++------+-----------+------+------+------------+-------------+--------+
+| f004 | nsk       | kos  |   21 | 2004-12-28 | gajuwaka    | cse    |
+| f003 | narasimha | kos  |   20 | 2024-09-28 | rtc-complex | python |
+| dfrt | nsk       | thy  | NULL | NULL       | NULL        | java   |
++------+-----------+------+------+------------+-------------+--------+
+3 rows in set (0.00 sec)
+
+mysql> use exam_saas_db;
+Database changed
+mysql> show tables;
++---------------------------------+
+| Tables_in_exam_saas_db          |
++---------------------------------+
+| account_emailaddress            |
+| account_emailconfirmation       |
+| accounts_passwordresetotp       |
+| accounts_user                   |
+| accounts_user_groups            |
+| accounts_user_user_permissions  |
+| ai_monitoring_confidencescore   |
+| ai_monitoring_proctoringsession |
+| ai_monitoring_violation         |
+| analytics_candidateanalytics    |
+| analytics_examanalytics         |
+| attempts_answer                 |
+| attempts_attempt                |
+| attempts_waitingroomentry       |
+| auth_group                      |
+| auth_group_permissions          |
+| auth_permission                 |
+| django_admin_log                |
+| django_content_type             |
+| django_migrations               |
+| django_session                  |
+| django_site                     |
+| exams_exam                      |
+| exams_examquestion              |
+| organizations_organization      |
+| questions_question              |
+| socialaccount_socialaccount     |
+| socialaccount_socialapp         |
+| socialaccount_socialapp_sites   |
+| socialaccount_socialtoken       |
+| subscriptions_plan              |
+| subscriptions_subscription      |
++---------------------------------+
+32 rows in set (0.01 sec)
+
+mysql> desc account_emailaddress;
++----------+--------------+------+-----+---------+----------------+
+| Field    | Type         | Null | Key | Default | Extra          |
++----------+--------------+------+-----+---------+----------------+
+| id       | int          | NO   | PRI | NULL    | auto_increment |
+| email    | varchar(254) | NO   | MUL | NULL    |                |
+| verified | tinyint(1)   | NO   |     | NULL    |                |
+| primary  | tinyint(1)   | NO   |     | NULL    |                |
+| user_id  | bigint       | NO   | MUL | NULL    |                |
++----------+--------------+------+-----+---------+----------------+
+5 rows in set (0.01 sec)
+
+mysql> select *from account_emailaddress;
++----+---------------------+----------+---------+---------+
+| id | email               | verified | primary | user_id |
++----+---------------------+----------+---------+---------+
+| 31 | nskk74667@gmail.com |        1 |       1 |      43 |
++----+---------------------+----------+---------+---------+
+1 row in set (0.01 sec)
+
+mysql> desc account_users;
+ERROR 1146 (42S02): Table 'exam_saas_db.account_users' doesn't exist
+mysql> desc accounts_user;
++---------------+--------------+------+-----+---------+----------------+
+| Field         | Type         | Null | Key | Default | Extra          |
++---------------+--------------+------+-----+---------+----------------+
+| id            | bigint       | NO   | PRI | NULL    | auto_increment |
+| password      | varchar(128) | NO   |     | NULL    |                |
+| last_login    | datetime(6)  | YES  |     | NULL    |                |
+| is_superuser  | tinyint(1)   | NO   |     | NULL    |                |
+| username      | varchar(150) | NO   | UNI | NULL    |                |
+| first_name    | varchar(150) | NO   |     | NULL    |                |
+| last_name     | varchar(150) | NO   |     | NULL    |                |
+| email         | varchar(254) | NO   |     | NULL    |                |
+| is_staff      | tinyint(1)   | NO   |     | NULL    |                |
+| is_active     | tinyint(1)   | NO   |     | NULL    |                |
+| date_joined   | datetime(6)  | NO   |     | NULL    |                |
+| role          | varchar(20)  | NO   |     | NULL    |                |
+| phone         | varchar(20)  | NO   |     | NULL    |                |
+| profile_photo | varchar(100) | YES  |     | NULL    |                |
++---------------+--------------+------+-----+---------+----------------+
+14 rows in set (0.01 sec)
+
+mysql> select*from accounts_user;
++----+------------------------------------------------------------------------------------------+----------------------------+--------------+-----------+------------+------------------+------------------------------------+----------+-----------+----------------------------+-------------+---------------+-----------------------------------------------+
+| id | password                                                                                 | last_login                 | is_superuser | username  | first_name | last_name        | email                              | is_staff | is_active | date_joined                | role        | phone         | profile_photo                                 |
++----+------------------------------------------------------------------------------------------+----------------------------+--------------+-----------+------------+------------------+------------------------------------+----------+-----------+----------------------------+-------------+---------------+-----------------------------------------------+
+|  1 | !vvt6dum6Ilnu3zX8RXi2jN0RnkuImM4yrUTzRXNT                                                | 2026-07-01 08:08:45.381270 |            1 | admin_nsk | The        | Creator          | narasimhasaikumar.kosuri@gmail.com |        1 |         1 | 2026-02-27 06:34:08.726749 | SUPER_ADMIN | +917997847720 | profile_photos/main-logo-modified_vGdnHFX.png |
+| 40 | !9wnMbRDoPidk0I9SuTb7GpppZ5dVIPW84Kxu6LN6                                                | 2026-06-24 04:21:41.688522 |            0 | renuka    | renuka     |                  | kosurirenukadevi4200@gmail.com     |        0 |         1 | 2026-03-11 11:14:22.655390 | ORG_ADMIN   |               | NULL                                          |
+| 41 | !eQCflgG30Q7tv5w8cqaxXVBqrvcBIDR0ZoqEv7S6                                                | 2026-03-29 06:37:30.094773 |            0 | sai       | Narasimha  | Sai Kumar Kosuri | knsknsk10@gmail.com                |        0 |         1 | 2026-03-11 14:28:11.000321 | STUDENT     | +917997847720 | profile_photos/download_5.jpeg                |
+| 42 | pbkdf2_sha256$600000$jsDMOENZKkRFpvZrCQa8qI$hp6AAPjrJl0FsIF+kLDCk3vv6dL/eI5zVG4RWh8WPn4= | NULL                       |            0 | bhaskar   | bhaskar    |                  | neelambhaskar2552@gmail.com        |        0 |         0 | 2026-03-24 07:08:43.309140 | ORG_ADMIN   |               |                                               |
+| 43 | !etxBqMlZ8sXGnTDfKbohO5N8IKJ3QyNupGZqCCCS                                                | 2026-03-25 16:25:42.083476 |            0 | k         | k          | NSK              | nskk74667@gmail.com                |        0 |         1 | 2026-03-24 07:12:03.813119 | ORG_ADMIN   |               |                                               |
+| 44 | pbkdf2_sha256$600000$zLfoiqKLRgfUSoOWE3xAj1$7wIzWU7oDANBE4d663k816N/vGOirRfeN83zjQJj8LA= | NULL                       |            0 | bala      | bala       |                  | kbalakrishna3993@gmail.com         |        0 |         0 | 2026-03-24 07:14:11.933903 | ORG_ADMIN   |               |                                               |
+| 45 | pbkdf2_sha256$600000$tzLi7LT2adPlJW3HMF0qcB$RcDc3ClAduB+s38JYDw7Ca79azReUsxFPCq2XNKDpqQ= | NULL                       |            0 | dinesh    | dinesh     |                  | dineshdinu3036@gmail.com           |        0 |         0 | 2026-07-13 05:06:29.220976 | ORG_ADMIN   |               |                                               |
+| 46 | pbkdf2_sha256$600000$cBs17UCSeHvbeRLG6WQJaW$C2pyNjMY51SuAx8+YJvDDNGK0ljjGg50jAGGRjJQjCM= | NULL                       |            0 | dinesh1   | dinesh     |                  | dineshdinu3026@gmail.com           |        0 |         0 | 2026-07-13 05:09:33.070828 | STUDENT     |               |                                               |
++----+------------------------------------------------------------------------------------------+----------------------------+--------------+-----------+------------+------------------+------------------------------------+----------+-----------+----------------------------+-------------+---------------+-----------------------------------------------+
+8 rows in set (0.07 sec)
+
+mysql> use sqlp;
+Database changed
+mysql> commit;
+Query OK, 0 rows affected (0.00 sec)
+
