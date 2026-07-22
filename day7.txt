@@ -1,0 +1,182 @@
+mysql> use sqlp
+Database changed
+mysql> create table emp(
+    -> empid int primary key,
+    -> emp_name varchar(30),
+    -> salary decimal(10,2));
+Query OK, 0 rows affected (0.15 sec)
+
+mysql> desc emp;
++----------+---------------+------+-----+---------+-------+
+| Field    | Type          | Null | Key | Default | Extra |
++----------+---------------+------+-----+---------+-------+
+| empid    | int           | NO   | PRI | NULL    |       |
+| emp_name | varchar(30)   | YES  |     | NULL    |       |
+| salary   | decimal(10,2) | YES  |     | NULL    |       |
++----------+---------------+------+-----+---------+-------+
+3 rows in set (0.03 sec)
+
+mysql> start transaction;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> insert into emp (01,"nsk",233566)
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '01,"nsk",233566)' at line 1
+mysql> insert into emp values(01,"nsk",233566);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from emp;
++-------+----------+-----------+
+| empid | emp_name | salary    |
++-------+----------+-----------+
+|     1 | nsk      | 233566.00 |
++-------+----------+-----------+
+1 row in set (0.00 sec)
+
+mysql> insert into emp values(02,"sai",56575686);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> commit;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select *from emp;
++-------+----------+-------------+
+| empid | emp_name | salary      |
++-------+----------+-------------+
+|     1 | nsk      |   233566.00 |
+|     2 | sai      | 56575686.00 |
++-------+----------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> start transaction;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> insert into emp (03,"narasimha",2783654)
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '03,"narasimha",2783654)' at line 1
+mysql> insert into emp values(03,"narasimha",2783654);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> savapoint 1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'savapoint 1' at line 1
+mysql> savapoint s1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'savapoint s1' at line 1
+mysql> savepoint 1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1' at line 1
+mysql> savepoint s1;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> update table emp set salary=salary+5000 where empid>3;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table emp set salary=salary+5000 where empid>3' at line 1
+mysql> update emp set salary=salary+5000 where empid>3;
+Query OK, 0 rows affected (0.01 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> savepoint s2;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select*from emp;
++-------+-----------+-------------+
+| empid | emp_name  | salary      |
++-------+-----------+-------------+
+|     1 | nsk       |   233566.00 |
+|     2 | sai       | 56575686.00 |
+|     3 | narasimha |  2783654.00 |
++-------+-----------+-------------+
+3 rows in set (0.00 sec)
+
+mysql> update emp set salary=salary+5000 where empid<3;
+Query OK, 2 rows affected (0.00 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> select*from emp;
++-------+-----------+-------------+
+| empid | emp_name  | salary      |
++-------+-----------+-------------+
+|     1 | nsk       |   238566.00 |
+|     2 | sai       | 56580686.00 |
+|     3 | narasimha |  2783654.00 |
++-------+-----------+-------------+
+3 rows in set (0.00 sec)
+
+mysql> rollback to s1;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> rollback to s2;
+ERROR 1305 (42000): SAVEPOINT s2 does not exist
+mysql> rollback;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select *from emp;
++-------+----------+-------------+
+| empid | emp_name | salary      |
++-------+----------+-------------+
+|     1 | nsk      |   233566.00 |
+|     2 | sai      | 56575686.00 |
++-------+----------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> rollback;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> rollback;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select *from emp;
++-------+----------+-------------+
+| empid | emp_name | salary      |
++-------+----------+-------------+
+|     1 | nsk      |   233566.00 |
+|     2 | sai      | 56575686.00 |
++-------+----------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> insert into emp values(03,"narasimha",2783654);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> savepoint s1;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select*from emp;
++-------+-----------+-------------+
+| empid | emp_name  | salary      |
++-------+-----------+-------------+
+|     1 | nsk       |   233566.00 |
+|     2 | sai       | 56575686.00 |
+|     3 | narasimha |  2783654.00 |
++-------+-----------+-------------+
+3 rows in set (0.00 sec)
+
+mysql> lock tables emp write;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> unlock tables emp;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'emp' at line 1
+mysql> unlock tables;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> lock tables emp read;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> unlock tables;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select *from emp;
++-------+-----------+-------------+
+| empid | emp_name  | salary      |
++-------+-----------+-------------+
+|     1 | nsk       |   233566.00 |
+|     2 | sai       | 56575686.00 |
+|     3 | narasimha |  2783654.00 |
++-------+-----------+-------------+
+3 rows in set (0.00 sec)
+
+mysql> select *from emp where empid=1 for update;
++-------+----------+-----------+
+| empid | emp_name | salary    |
++-------+----------+-----------+
+|     1 | nsk      | 233566.00 |
++-------+----------+-----------+
+1 row in set (0.00 sec)
+
+mysql> Terminal close -- exit!
