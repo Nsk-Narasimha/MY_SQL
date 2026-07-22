@@ -61,3 +61,11 @@ I created a Products table and practiced writing queries with arithmetic operati
 I also calculated taxes, discounts, and used aliases to improve query readability. 
 These exercises showed how SQL can perform calculations directly within queries. 
 This session strengthened my skills in writing dynamic SQL queries.
+
+# Day 9 - Comparison and Logical Operators in SQL
+
+On Day 9, I practiced using comparison and logical operators in SQL queries. 
+I learned how to filter records with operators such as `=`, `!=`, `>`, `<`, `>=`, and `<=` using the `WHERE` clause. 
+I also explored logical operators like `AND`, `OR`, and `NOT` with `SELECT`, `UPDATE`, and `DELETE` statements. 
+Through hands-on exercises, I performed conditional data retrieval and modification. 
+This session improved my ability to write accurate and efficient SQL queries.
