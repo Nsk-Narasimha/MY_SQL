@@ -1,0 +1,149 @@
+mysql> CREATE TABLE Products (
+    ->  id INT,
+    ->  name VARCHAR(100),
+    ->  price DECIMAL(10,2),
+    ->  qty INT
+    ->  );
+ERROR 1046 (3D000): No database selected
+mysql> 
+mysql> 
+mysql> INSERT INTO Products VALUES
+    ->  (1, 'Pen', 10.00, 100),
+    ->  (2, 'Notebook', 25.00, 50),
+    ->  (3, 'Pencil', 5.00, 200),
+    ->  (4, 'Eraser', 3.00, 300),
+    ->  (5, 'Marker', 15.00, 80),
+    ->  (6, 'Scale', 20.00, 150),
+    ->  (7, 'Sharpener', 8.00, 120),
+    ->  (8, 'Geometry Box', 120.00, 40),
+    ->  (9, 'Sketch Pen', 60.00, 75),
+    ->  (10, 'Crayons', 90.00, 55);
+ERROR 1046 (3D000): No database selected
+mysql> use sqlp;
+Database changed
+mysql> CREATE TABLE Products (
+    ->  id INT,
+    ->  name VARCHAR(100),
+    ->  price DECIMAL(10,2),
+    ->  qty INT
+    ->  );
+Query OK, 0 rows affected (0.44 sec)
+
+mysql> 
+mysql> 
+mysql> INSERT INTO Products VALUES
+    ->  (1, 'Pen', 10.00, 100),
+    ->  (2, 'Notebook', 25.00, 50),
+    ->  (3, 'Pencil', 5.00, 200),
+    ->  (4, 'Eraser', 3.00, 300),
+    ->  (5, 'Marker', 15.00, 80),
+    ->  (6, 'Scale', 20.00, 150),
+    ->  (7, 'Sharpener', 8.00, 120),
+    ->  (8, 'Geometry Box', 120.00, 40),
+    ->  (9, 'Sketch Pen', 60.00, 75),
+    ->  (10, 'Crayons', 90.00, 55);
+Query OK, 10 rows affected (0.04 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> select*from products;
++------+--------------+--------+------+
+| id   | name         | price  | qty  |
++------+--------------+--------+------+
+|    1 | Pen          |  10.00 |  100 |
+|    2 | Notebook     |  25.00 |   50 |
+|    3 | Pencil       |   5.00 |  200 |
+|    4 | Eraser       |   3.00 |  300 |
+|    5 | Marker       |  15.00 |   80 |
+|    6 | Scale        |  20.00 |  150 |
+|    7 | Sharpener    |   8.00 |  120 |
+|    8 | Geometry Box | 120.00 |   40 |
+|    9 | Sketch Pen   |  60.00 |   75 |
+|   10 | Crayons      |  90.00 |   55 |
++------+--------------+--------+------+
+10 rows in set (0.01 sec)
+
+mysql> select name,price,price+(price*0.12)as price_with_tax from products;
++--------------+--------+----------------+
+| name         | price  | price_with_tax |
++--------------+--------+----------------+
+| Pen          |  10.00 |        11.2000 |
+| Notebook     |  25.00 |        28.0000 |
+| Pencil       |   5.00 |         5.6000 |
+| Eraser       |   3.00 |         3.3600 |
+| Marker       |  15.00 |        16.8000 |
+| Scale        |  20.00 |        22.4000 |
+| Sharpener    |   8.00 |         8.9600 |
+| Geometry Box | 120.00 |       134.4000 |
+| Sketch Pen   |  60.00 |        67.2000 |
+| Crayons      |  90.00 |       100.8000 |
++--------------+--------+----------------+
+10 rows in set (0.02 sec)
+
+mysql> select name,price,price+(price*0.12) from products;
++--------------+--------+--------------------+
+| name         | price  | price+(price*0.12) |
++--------------+--------+--------------------+
+| Pen          |  10.00 |            11.2000 |
+| Notebook     |  25.00 |            28.0000 |
+| Pencil       |   5.00 |             5.6000 |
+| Eraser       |   3.00 |             3.3600 |
+| Marker       |  15.00 |            16.8000 |
+| Scale        |  20.00 |            22.4000 |
+| Sharpener    |   8.00 |             8.9600 |
+| Geometry Box | 120.00 |           134.4000 |
+| Sketch Pen   |  60.00 |            67.2000 |
+| Crayons      |  90.00 |           100.8000 |
++--------------+--------+--------------------+
+10 rows in set (0.00 sec)
+
+mysql> select name,price,price+(price*0.12)-5 as discount from products;
++--------------+--------+----------+
+| name         | price  | discount |
++--------------+--------+----------+
+| Pen          |  10.00 |   6.2000 |
+| Notebook     |  25.00 |  23.0000 |
+| Pencil       |   5.00 |   0.6000 |
+| Eraser       |   3.00 |  -1.6400 |
+| Marker       |  15.00 |  11.8000 |
+| Scale        |  20.00 |  17.4000 |
+| Sharpener    |   8.00 |   3.9600 |
+| Geometry Box | 120.00 | 129.4000 |
+| Sketch Pen   |  60.00 |  62.2000 |
+| Crayons      |  90.00 |  95.8000 |
++--------------+--------+----------+
+10 rows in set (0.01 sec)
+
+mysql> select name,price,price-price*10/100 as discount from products;
++--------------+--------+------------+
+| name         | price  | discount   |
++--------------+--------+------------+
+| Pen          |  10.00 |   9.000000 |
+| Notebook     |  25.00 |  22.500000 |
+| Pencil       |   5.00 |   4.500000 |
+| Eraser       |   3.00 |   2.700000 |
+| Marker       |  15.00 |  13.500000 |
+| Scale        |  20.00 |  18.000000 |
+| Sharpener    |   8.00 |   7.200000 |
+| Geometry Box | 120.00 | 108.000000 |
+| Sketch Pen   |  60.00 |  54.000000 |
+| Crayons      |  90.00 |  81.000000 |
++--------------+--------+------------+
+10 rows in set (0.00 sec)
+
+mysql> select name,price,price-price*10/100 as discount from products;
++--------------+--------+------------+
+| name         | price  | discount   |
++--------------+--------+------------+
+| Pen          |  10.00 |   9.000000 |
+| Notebook     |  25.00 |  22.500000 |
+| Pencil       |   5.00 |   4.500000 |
+| Eraser       |   3.00 |   2.700000 |
+| Marker       |  15.00 |  13.500000 |
+| Scale        |  20.00 |  18.000000 |
+| Sharpener    |   8.00 |   7.200000 |
+| Geometry Box | 120.00 | 108.000000 |
+| Sketch Pen   |  60.00 |  54.000000 |
+| Crayons      |  90.00 |  81.000000 |
++--------------+--------+------------+
+10 rows in set (0.00 sec)
+
