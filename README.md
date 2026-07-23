@@ -69,3 +69,11 @@ I learned how to filter records with operators such as `=`, `!=`, `>`, `<`, `>=`
 I also explored logical operators like `AND`, `OR`, and `NOT` with `SELECT`, `UPDATE`, and `DELETE` statements. 
 Through hands-on exercises, I performed conditional data retrieval and modification. 
 This session improved my ability to write accurate and efficient SQL queries.
+
+# Day 10 - SQL Filtering and Conditional Queries
+
+On Day 10, I learned how to filter and organize data using different SQL clauses and operators. 
+I practiced using `BETWEEN`, `LIKE`, `CASE`, and `IN` to retrieve records based on specific conditions. 
+I also explored pattern matching with wildcards and conditional expressions to customize query results. 
+Through hands-on exercises, I improved my ability to write flexible and efficient SQL queries. 
+This session strengthened my understanding of data filtering and conditional logic in MySQL.
